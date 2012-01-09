@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.files = Dir[ 'lib/**/*.rb', 'README.rdoc', 'CHANGELOG.rdoc' ]
 
   # dependencies
-  # s.add_dependency 'activemodel', '~> 3.0'
+  s.add_dependency 'savon', '~> 0.9'
 
   # if binaries
   # s.bindir = 'bin'
