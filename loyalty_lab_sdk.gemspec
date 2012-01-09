@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Library for accessing the Loyalty Lab API.}
   s.description = %q{Full documentation of the API is at http://api.loyaltylab.com/loyaltyapi/help/index.html.}
   s.authors = [ 'David Dawson' ]
-  s.email = %q{daws23@gmail.com}
+  s.email = %q{david@stashrewards.com}
   s.homepage = %q{http://www.stashrewards.com}
   s.require_paths = [ 'lib' ]
   
