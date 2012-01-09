@@ -1,0 +1,9 @@
+= Loyalty Lab SDK
+
+Library for accessing the Loyalty Lab API documented here: http://api.loyaltylab.com/loyaltyapi/help/index.html
+
+== Synopsis:
+
+ LoyaltyLabSDK.config(:username => 'foo', :password => 'bar')
+ loyalty_api = LoyaltyLabSDK::LoyaltyAPI.new
+ shopper = loyalty_api.GetShopper(:shopperId => 1234)
