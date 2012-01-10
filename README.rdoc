@@ -2,6 +2,8 @@
 
 A ruby library for accessing the Loyalty Lab API documented here: http://api.loyaltylab.com/loyaltyapi/help/index.html
 
+This library attempts to be as transparent as possible by making all method calls, parameters, and objects identical to those documented at the above URL. Capitalization goes against typical ruby conventions, and is instead as documented by Loyalty Lab.
+
 NOTE: This software is in no way affiliated with the Loyalty Lab organization.
 
 == Synopsis
