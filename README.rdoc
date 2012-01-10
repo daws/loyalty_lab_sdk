@@ -2,8 +2,35 @@
 
 Library for accessing the Loyalty Lab API documented here: http://api.loyaltylab.com/loyaltyapi/help/index.html
 
-== Synopsis:
+== Synopsis
 
  LoyaltyLabSDK.config(:username => 'foo', :password => 'bar')
- loyalty_api = LoyaltyLabSDK::LoyaltyAPI.new
- shopper = loyalty_api.GetShopper(:shopperId => 1234)
+
+ api = LoyaltyLabSDK::LoyaltyAPI.new
+ shopper = api.GetShopper 'shopperId' => 1234
+ shopper_id = shopper['ShopperId']
+ point_balance = api.AdjustShopperPoints 'shopperId' => shopper_id,
+  'pointChange' => 1000,
+  'pointType' => 'Base',
+  'description' => 'Surprise bonus'
+
+ new_shopper = api.build_default_shopper(1234)
+ new_shopper['EmailAddress'] = 'test@gmail.com'
+ new_shopper['FirstName'] = 'Joe'
+ new_shopper['LastName'] = 'Schmoe'
+ new_card = api.build_default_card(1234)
+ api.CreateShopperWithCard 'shopper' => new_shopper, 'card' => new_card
+
+== Authentication
+
+By default, a new LoyaltyAPI instance will authenticate itself against the API (using #authenticate!) and store the authentication token when it is constructed. Authentication may be skipped by setting the :lazy_authentication option to true when calling the constructor. In this case, authentication will occur when the first API call is made (or it may be done explicitly).
+
+According to Loyalty Lab, the authentication token will expire after 20 minutes of inactivity. There is currently no built-in behavior to handle this, so it must be accommdated by the client for long-lived objects, either by pro-actively calling #authenticate!, or by catching AuthenticationError exceptions and re-authenticating then.
+
+== Environment Variables
+
+For convenience in a command-line environment, configuration of username and password may be skipped by setting the LOYALTY_LAB_SDK_USERNAME and LOYALTY_LAB_SDK_PASSWORD environment variables.
+
+== Rails
+
+If running in a rails environment, this configuration will automatically use the global Rails.logger instance. This behavior may be overridden by passing in a :logger option to LoyaltyLabSDK.config.
