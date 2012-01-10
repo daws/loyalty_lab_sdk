@@ -1,5 +1,8 @@
 = Loyalty Lab SDK
 
+== Version 0.0.1
+* Updating gemspec website to point at github
+
 == Version 0.0.0
 * Initial release
 * Supports all LoyaltyAPI calls
