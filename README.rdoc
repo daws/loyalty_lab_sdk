@@ -27,6 +27,10 @@ By default, a new LoyaltyAPI instance will authenticate itself against the API (
 
 According to Loyalty Lab, the authentication token will expire after 20 minutes of inactivity. There is currently no built-in behavior to handle this, so it must be accommdated by the client for long-lived objects, either by pro-actively calling #authenticate!, or by catching AuthenticationError exceptions and re-authenticating then.
 
+== Timeouts
+
+By default, all requests will timeout (for opening connections and making requests) after 15 seconds. This may be overridden by setting the :open_timeout and :read_timeout options when calling LoyaltyLabSDK.config.
+
 == Environment Variables
 
 For convenience in a command-line environment, configuration of username and password may be skipped by setting the LOYALTY_LAB_SDK_USERNAME and LOYALTY_LAB_SDK_PASSWORD environment variables.
