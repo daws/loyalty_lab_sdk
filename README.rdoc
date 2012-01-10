@@ -25,7 +25,7 @@ Library for accessing the Loyalty Lab API documented here: http://api.loyaltylab
 
 By default, a new LoyaltyAPI instance will authenticate itself against the API (using #authenticate!) and store the authentication token when it is constructed. Authentication may be skipped by setting the :lazy_authentication option to true when calling the constructor. In this case, authentication will occur when the first API call is made (or it may be done explicitly).
 
-According to Loyalty Lab, the authentication token will expire after 20 minutes of inactivity. There is currently no built-in behavior to handle this, so it must be accommdated by the client for long-lived objects, either by pro-actively calling #authenticate!, or by catching AuthenticationError exceptions and re-authenticating then.
+According to Loyalty Lab, the authentication token will expire after 20 minutes of inactivity. By default, LoyaltyAPI has an option :allow_reauthenticate that defaults to true (may be overridden). If it's true, then when you receive an AuthenticationError while making an API call on an already-authenticated LoyaltyAPI instance, it will try once to re-authenticate automatically. This behavior could be overridden by the client by setting :allow_reauthenticate to false and then either ignoring the error, pro-actively calling #authenticate!, or catching AuthenticationError exceptions and re-authenticating then.
 
 == Timeouts
 

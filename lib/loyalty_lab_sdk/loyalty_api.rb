@@ -23,9 +23,13 @@ class LoyaltyAPI
   # @param [Hash] options
   # @option options [boolean] :lazy_authentication (false) Delays authentication
   #   until either the first call is made or it is done explicitly.
+  # @option options [boolean] :allow_reauthenticate (true) If true, will
+  #   attempt to re-authenticate the client once automatically if an
+  #   AuthenticationError is thrown (on any call).
   def initialize(options = {})
     self.config = {
-      :lazy_authentication => false
+      :lazy_authentication => false,
+      :allow_reauthenticate => true,
     }.merge!(LoyaltyLabSDK.config).merge!(options)
 
     Savon.configure do |c|
@@ -53,7 +57,8 @@ class LoyaltyAPI
   def authenticate!
     response = self.AuthenticateUser(
       { :username => config[:username], :password => config[:password] },
-      :is_authenticate => true)
+      :is_authenticate => true,
+      :allow_reauthenticate => false)
 
     auth_data = {
       :retailer_guid => response['RetailerGuid'],
@@ -213,7 +218,8 @@ class LoyaltyAPI
   def call_api_method(method_name, request_body = nil, options = {})
     options = {
       :is_authenticate => false,
-      :connection_error_retries => LoyaltyLabSDK.config[:connection_error_retries],
+      :connection_error_retries => config[:connection_error_retries],
+      :allow_reauthenticate => config[:allow_reauthenticate],
     }.merge(options)
 
     if !@authenticated && !options[:is_authenticate]
@@ -244,7 +250,17 @@ class LoyaltyAPI
       end
     end
 
-    check_response_for_errors(response)
+    begin
+      check_response_for_errors(response)
+    rescue AuthenticationError => e
+      if options[:allow_reauthenticate]
+        authenticate!
+        options[:allow_reauthenticate] = false
+        return call_api_method(method_name, request_body, options)
+      else
+        raise e
+      end
+    end
 
     modified_method_name = method_name.underscore
 

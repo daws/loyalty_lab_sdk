@@ -10,7 +10,7 @@ describe LoyaltyLabSDK::LoyaltyAPI do
 
     it 'should allow junk shopper to be created' do
       shopper = subject.build_default_shopper(Guid.new.to_s)
-      shopper['EmailAddress'] = "#{Guid.new.to_s}@stashrewards.com"
+      shopper['EmailAddress'] = "#{Guid.new.to_s}@example.com"
       shopper['FirstName'] = Guid.new.to_s
       shopper['LastName'] = Guid.new.to_s
       lambda { subject.CreateShopper('shopper' => shopper) }.should_not raise_error
@@ -76,6 +76,26 @@ describe LoyaltyLabSDK::LoyaltyAPI do
       end
       lambda { subject.authenticate! }.should raise_error(LoyaltyLabSDK::ConnectionError)
       subject.retry_attempts.should == 3
+    end
+
+  end
+
+  context 'a previously-authenticated instance whose authentication token is expired' do
+
+    subject do
+      api = LoyaltyLabSDK::LoyaltyAPI.new
+      api.instance_eval do
+        auth_header["wsdl:AuthenticationResult"]["wsdl:Token"] = "junk"
+      end
+      api
+    end
+
+    it 'should raise AuthenticationError if :allow_reauthenticate is false' do
+      lambda { subject.GetEventDefinitions({}, :allow_reauthenticate => false) }.should raise_error(LoyaltyLabSDK::AuthenticationError)
+    end
+
+    it 'should re-authenticate and succeed if left to defaults' do
+      lambda { subject.GetEventDefinitions }.should_not raise_error
     end
 
   end
