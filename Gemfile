@@ -1,4 +1,3 @@
-source 'https://geminabox.stashrewards.com:8808'
 source 'http://rubygems.org'
 
 gem 'activesupport', '~> 3.0', :require => nil
@@ -7,7 +6,7 @@ gem 'i18n', '~> 0.6', :require => nil
 gem 'savon', '~> 0.9', :require => nil
 
 group :rake do
-  gem 'stash_gem_support', :require => 'tasks/stash_gem_support'
+  gem 'simple_gem', :require => 'tasks/simple_gem'
 end
 
 group :test do
