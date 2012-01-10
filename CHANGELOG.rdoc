@@ -1,4 +1,10 @@
 = Loyalty Lab SDK
 
 == Version 0.0.0
-* Change information here
+* Initial release
+* Supports all LoyaltyAPI calls
+* Supports lazy authentication
+* Supports environment variable authentication
+* Helpers for creating shoppers
+* Supports retries on timeout errors
+* Supports re-authentication when authentication token expires
