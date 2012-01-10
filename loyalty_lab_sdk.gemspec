@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
   
   # documentation
   s.has_rdoc = true
-  s.extra_rdoc_files = %w( README.rdoc CHANGELOG.rdoc )
+  s.extra_rdoc_files = %w( README.rdoc CHANGELOG.rdoc LICENSE.txt )
   s.rdoc_options = %w( --main README.rdoc )
 
   # files to include
-  s.files = Dir[ 'lib/**/*.rb', 'README.rdoc', 'CHANGELOG.rdoc' ]
+  s.files = Dir[ 'lib/**/*.rb', 'README.rdoc', 'CHANGELOG.rdoc', 'LICENSE.txt' ]
 
   # dependencies
   s.add_dependency 'activesupport', '~> 3.0'
