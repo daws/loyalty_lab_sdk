@@ -1,6 +1,8 @@
 = Loyalty Lab SDK
 
-Library for accessing the Loyalty Lab API documented here: http://api.loyaltylab.com/loyaltyapi/help/index.html
+A ruby library for accessing the Loyalty Lab API documented here: http://api.loyaltylab.com/loyaltyapi/help/index.html
+
+NOTE: This software is in no way affiliated with the Loyalty Lab organization.
 
 == Synopsis
 
