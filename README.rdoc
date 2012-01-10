@@ -16,11 +16,12 @@ NOTE: This software is in no way affiliated with the Loyalty Lab organization.
   'pointType' => 'Base',
   'description' => 'Surprise bonus'
 
- new_shopper = api.build_default_shopper(1234)
+ new_retailer_shopper_id = 1234
+ new_shopper = api.build_default_shopper(new_retailer_shopper_id)
  new_shopper['EmailAddress'] = 'test@gmail.com'
  new_shopper['FirstName'] = 'Joe'
  new_shopper['LastName'] = 'Schmoe'
- new_card = api.build_default_card(1234)
+ new_card = api.build_default_card(new_retailer_shopper_id)
  api.CreateShopperWithCard 'shopper' => new_shopper, 'card' => new_card
 
 == Authentication
