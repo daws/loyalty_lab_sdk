@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   # dependencies
   s.add_dependency 'activesupport', '~> 3.0'
   s.add_dependency 'httpi', '~> 0.9'
-  s.add_dependency 'i18n', '~> 0.6'
+  s.add_dependency 'i18n', '~> 0.5'
   s.add_dependency 'savon', '~> 0.9'
 
   s.add_development_dependency 'guid', '~> 0.1'
