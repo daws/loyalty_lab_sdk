@@ -1,5 +1,8 @@
 = Loyalty Lab SDK
 
+== Version 0.0.3
+* Loosening i18n requirement to accommodate rails 3.0
+
 == Version 0.0.2
 * Updating dev dependency to public "simple_gem"
 
